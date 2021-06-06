@@ -14,9 +14,10 @@
  * limitations under the License.
  * 
  * Modifications: Copyright 2020 - 2021 Creative Labs at UCLA or its affliates.
- * Removed the key/value: 'status/final-comment-period': '⏰ final comments' from
- * the display variable.
- *
+ * * Removed the key/value: 'status/final-comment-period': '⏰ final comments' from
+ *   the display variable.
+ * * Replace aws-cdk-rfcs links to go to UCLA-Creative-Labs/cl-rfcs
+ * * Protect against an empty text/ directory and no files
  */
 
 const Octokit = require('@octokit/rest');
@@ -48,7 +49,11 @@ exports.render = render;
 
 async function render() {
   const lines = [];
-  const files = await fs.readdir(path.join(__dirname, '..', '..', 'text'));
+  const textPath = path.join(__dirname, '..', '..', 'text');
+  let files;
+  fs.access(textPath)
+    .then(async () => files = await fs.readdir(textPath))
+    .catch(() => console.log('No RFCs found in text/ file'));
 
   const octo = new Octokit({
     auth: process.env.GITHUB_TOKEN
@@ -61,8 +66,8 @@ async function render() {
   }
 
   const request = octo.issues.listForRepo.endpoint.merge({
-    repo: 'aws-cdk-rfcs',
-    owner: 'aws',
+    repo: 'cl-rfcs',
+    owner: 'UCLA-Creative-Labs',
     state: 'all',
   });
 
@@ -93,11 +98,11 @@ async function render() {
 
     // we we already have a doc, then the link should go to it
     if (doc) {
-      link = `https://github.com/aws/aws-cdk-rfcs/blob/master/text/${doc}`;
+      link = `https://github.com/UCLA-Creative-Labs/cl-rfcs/blob/master/text/${doc}`;
     } else if (pr_number) {
-      link = `https://github.com/aws/aws-cdk-rfcs/pull/${pr_number}`;
+      link = `https://github.com/UCLA-Creative-Labs/cl-rfcs/pull/${pr_number}`;
     } else {
-      link = `https://github.com/aws/aws-cdk-rfcs/issues/${issue.number}`;
+      link = `https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/${issue.number}`;
     }
 
     issueByStatus[status].push({
@@ -118,7 +123,7 @@ async function render() {
   for (const issues of Object.values(issueByStatus)) {
     for (const row of issues.sort(byNumber)) {
       const cols = [
-        `[${row.number}](https://github.com/aws/aws-cdk-rfcs/issues/${row.number})`,
+        `[${row.number}](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/${row.number})`,
         `[${row.title}](${row.link})`,
         renderUser(row.assignee),
         display[row.status],
@@ -152,7 +157,7 @@ function renderUser(user) {
   return `[@${user}](https://github.com/${user})`;
 }
 
-function findDocFile(files, number) {
+function findDocFile(files = [], number) {
   return files.find(file => parseInt(file.split('-')[0]) === number);
 }
 
