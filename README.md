@@ -19,6 +19,9 @@ behavior to uclacreatives@gmail.com.
 **Jump to:** [What is an RFC?](#what-is-an-rfc) | [RFC Process](#rfc-process)
 
 <!--BEGIN_TABLE-->
+\#|Title|Owner|Status
+---|-----|-----|------
+[2](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2)|[Spotify Blend: Lots](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2)|[@BryanPan342](https://github.com/BryanPan342)|💡 proposed
 <!--END_TABLE-->
 
 ## What is an RFC?
