@@ -12,6 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * Modifications: Copyright 2020 - 2021 Creative Labs at UCLA or its affliates.
+ * Removed the key/value: 'status/final-comment-period': '⏰ final comments' from
+ * the display variable.
  *
  */
 
@@ -30,7 +34,6 @@ const display = {
   'status/implementing': '👷 implementing',
   'status/planning': '📆 planning',
   'status/approved': '👍 approved',
-  'status/final-comment-period': '⏰ final comments',
   'status/review': '✍️ review',
   'status/proposed': '💡 proposed',
   'status/done': '✅ done',
