@@ -4,7 +4,7 @@
 [![Mergify Status][mergify-status]][mergify]
 
 [mergify]: https://mergify.io
-[mergify-status]: https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/UCLA-Creative-Labs/project&style=flat
+[mergify-status]: https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/UCLA-Creative-Labs/cl-rfcs&style=flat
 
 This repository is a place to propose and track and new internal projects or
 changes to existing internal projects under [Creative Labs at UCLA].
