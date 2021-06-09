@@ -26,7 +26,8 @@ groups, choosing a theme, and playing the generated playlist.
 * It would be really cool if the user could type in, in their own words, a desired theme,
   and using NLP or something along those lines we could figure out what a playlist would
   look like. [This article is very interesting] (thanks @sriramb2000).
-  [This article is very interesting]: https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2
+
+[This article is very interesting]: https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2
 
 ## Why are we doing this?
 
