@@ -39,10 +39,6 @@ up songs.
 
 ## What is the high level design/implementation?
 
-> How would this project be structured? What are some of the high level services
-> needed to get this project up and running? How do you plan to tackle the
-> development process and what are some resources that we should be mindful of
-> before we start development?
 The best plan of attack for this project would be to create a PWA. Realistically, this
 would be a mobile-first application, but by creating a PWA we can a) support desktop
 and b) avoid working with something like React Native (bleh) but still achieve cross-
