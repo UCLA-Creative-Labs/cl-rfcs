@@ -3,7 +3,7 @@ rfc pr: [#4](https://github.com/UCLA-Creative-Labs/cl-rfcs/pull/4)
 tracking issue: https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2
 ---
 
-# Aurgy
+# Group Spotify Playlists
 
 A web app that takes a group of users and a theme and creates a playlist
 of songs which match the group's collective tastes and the theme.
