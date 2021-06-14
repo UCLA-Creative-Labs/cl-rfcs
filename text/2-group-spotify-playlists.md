@@ -10,7 +10,7 @@ of songs which match the group's collective tastes and the theme.
 
 ## Blurb
 
-This project, codenamed _Aurgy_, is intended to take Spotify's new (beta) feature,
+This project is intended to take Spotify's new (beta) feature,
 Blends, and extend it to groups. Additionally, we want to allow for choosing an
 overall theme for the generated playlist; so that a single group could perhaps
 generate multiple playlists for different ocassions.
