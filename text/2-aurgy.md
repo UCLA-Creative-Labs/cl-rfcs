@@ -64,11 +64,18 @@ user enters that code, their ID is added to the document. The document might loo
 like this:
 ```json
 "<unique id>": {
-  "users": [
-    "<id>", "<id>", ...
-  ]
+  "host_id": "<host id>",
+  "users": {
+    "<user id>": {
+      ...interesting data...
+    }
+  }
 }
 ```
+Furthermore, the actual lobby ID should be short or memorable. Looking into [human-readable IDs]
+seems promising.
+
+[human-readable IDs]: https://www.npmjs.com/package/human-readable-ids
 
 In the interim, something like Firebase Firestore should be enough. It might be a good idea
 to switch to something else (like MongoDB perhaps) if we want to worry about scaling and
@@ -87,15 +94,29 @@ First, we need a list of themes that the user can choose from. Some suggestions 
 "party", or "kickback". Then, we would have to correlate each theme with a set of track features,
 such as genre.
 
+As a further goal, we could allow a secondary level of customization. For example, some people's
+idea of what genres of music are approriate for a kickback can vary wildly from that of other
+people, so it would be nice if we could offer users some extra control.
+[This page on emoji-themed playlists] seems like a cool idea.
+
+[This page on emoji-themed playlists]: https://kal.im/creating-spotify-playlists-with-emojis/
+
+Alternatively or additionally, we could add a little blurb with the playlist types to make it
+more explicit what we think is appropriate for each occasion.
+
 We would also need to understand the users' music preferences. Again, we would pull things like
-favorite (recent?) genres and figure out areas of strongest intersection between users.
+favorite (recent?) genres and figure out areas of strongest intersection between users. For more
+detailed and accurate playlist generation, we should take into account the playlist theme. For
+example, if the theme indicates that the users want throwbacks, then it would be more appropriate
+to pull from their all-time or older favorites more so than recent listens.
 
 Finally, we want to take the features prescribed by the desired theme and the features that are
 most common among users, and pull songs that match as many of these features as possible.
 
-Once the playlist is generated, we can add it to the host's library.
-
-Playlist generation would of course be performed on the server side.
+Playlist generation would of course be performed on the server side. Also, the playlist would be
+initially created under a Spotify account dedicated to our app and subsequently shared with every
+member of the lobby. This way, we don't have to synchronize multiple users' libraries, and updates
+would only apply to a single playlist. This makes our lives a lot easier.
 
 [Spotify API]: https://developer.spotify.com/documentation/web-api/
 
@@ -109,20 +130,36 @@ Spotify offers a [playback SDK] to play music from Spotify on the client side. C
 
 ### What are the requirements for this project?
 
-The PWA itself will probably be built in React (possibly Next.js? I don't think it's necessary
-for this use case but @BryanPan342 what do you think?), and the backend will be Node.js-based.
-If we proceed with using Firestore for handling user lobbies to start with, then anyone with
-Firebase experience would be handy.
+The PWA itself will probably be built in Next.js (strictly speaking, this won't be necessary for
+our MVP (see below), but it will be a good idea for future-proofing), and the backend will be
+Node.js-based. If we proceed with using Firestore for handling user lobbies to start with, then anyone with Firebase experience would be handy.
 
-We will probably need OCI to host a server for generating playlists, since it makes more sense
-to do that than to perform that generation on the client side.
+We have two options for generating playlists:
+* We could use OCI to host a server for generating playlists.
+* We could use a serverless system.
+
+If we use a server-based model using something like OCI, then we would need to set up more
+infrastructure. This might be a good learning experience for those members who are less experienced
+with OCI, and it also may be cool to show the OCI team what we've been working on so we can get
+more free stuff. Also, OCI makes it easier to scale.
+
+If we use serverless, then we would need to set up a way to prevent too many playlist updates at
+once. One way to accomplish that is:
+1. Whenever a user logs in, save the user's data that is needed for playlist creation into their
+   appropriate entry in Firestore.
+2. Run a pub/sub serverless function that checks for updates every hour in a given user's data
+   field. If the data is constant, we can skip the update; otherwise, we run the update to the
+   playlist.
+
+Note that we need to be careful about concurrency issues.
 
 ### What are we launching today?
+The most important component of this project is themed group playlist generation. We also want to
+implement in-app playlist playback in order to have users repeatedly coming to our web app. Also,
+keeping users signed in will make it easier to (simulatedly) auto-update the playlist.
 
-The most important component of this project is themed group playlist generation. Playback from
-within our application is great, but not strictly necessary for an MVP. As such, we should focus
-on actually figuring out how to match a group of users' tastes with a theme, and to construct
-a collaborative playlist that actually makes sense given the input parameters.
+We should focus on actually figuring out how to match a group of users' tastes with a theme, and
+to construct a collaborative playlist that actually makes sense given the input parameters.
 
 ## FAQ
 
