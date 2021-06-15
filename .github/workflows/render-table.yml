@@ -25,5 +25,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Update RFC table in README
+          label: pr/tooling
           title: Update RFC table in README
           branch: auto/update-rfc-table
