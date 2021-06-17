@@ -72,8 +72,9 @@ to write some custom linters to test the efficacy of the our posts.
 
 **Markdown Linter**
 
-* Make sure all markdown files are only 80 characters long
+* Make sure all markdown files are only 80 characters wide
 * Warnings for spelling would be a nice to have
+  * For a spell check GH Action: https://github.com/rojopolis/spellcheck-github-actions
 * Hopefully we can find a linter out there for this already
 
 ### Search
@@ -107,6 +108,10 @@ develop. Future iterations can add custom metadata through the `gray-matter` of
 posts to add images to the metadata and improve SEO. However, everything I laid
 out in the blurb is reasonally achievable.
 
+@sriramb2000 suggested site maps as a means to increase SEO:
+
+https://www.npmjs.com/package/nextjs-sitemap-generator
+
 ## FAQ
 
 ### How long should posts be?
@@ -116,6 +121,13 @@ be fun and hopefully this weekly task doesn't feel like a chore. Finding inspo a
 writing about it should take around 30 minutes. Writing concise documentation is a big
 part of developing and hopefully through this activity, our team will come to 
 appreciate documentation.
+
+### Should posts require code snippets?
+
+The depth of a post should be decided between the reviewer and reviewee during the 
+pull request. If the reviewer thinks the addition of code snippets would improve
+the post itself and the reviewee's understanding of the subject, the reviewer 
+can request the addition.
 
 ### When would we start this program?
 
