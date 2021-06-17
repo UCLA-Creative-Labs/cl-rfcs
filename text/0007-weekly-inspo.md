@@ -185,14 +185,14 @@ root
 #### Posts
 
 All posts go inside the `_posts/` directory. Posts must be named in 
-`kebab-case`. To see an example post check out [this section](#example:-post)
+`kebab-case`. To see an example post check out [this section](#example-post)
 of the Appendix.
 
 #### Team
 
 All team member info go inside the `_team/` directory. Files must be named in 
 `kebab-case`. To see an example team member file check out
-[this section](#example:-team-member) of the Appendix.
+[this section](#example-team-member) of the Appendix.
 
 #### Components
 
