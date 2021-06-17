@@ -1,5 +1,5 @@
 ---
-rfc pr: [#xxx](https://github.com/UCLA-Creative-Labs/cl-rfcs/pull/xxx)
+rfc pr: https://github.com/UCLA-Creative-Labs/cl-rfcs/pull/xxx
 tracking issue: https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/yyy
 ---
 
