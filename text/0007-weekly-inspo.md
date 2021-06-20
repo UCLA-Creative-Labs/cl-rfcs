@@ -24,7 +24,7 @@ from and what category the inspo belongs to.
 
 All these markdown files will accumulate into a blog site that is easily accessible to
 anyone outside of the dev team to read. The site will be searchable, filterable, and 
-creatively designed to show off our inspo in an unique fashion.
+creatively designed to show off our inspo in a unique fashion.
 
 Ultimately, the purpose of `xplr` is to constantly expose our dev team to the greater 
 world of dev and to familarize everyone with documentation, the PR process, and 
