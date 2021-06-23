@@ -14,8 +14,7 @@ that inspire the Creative Labs dev team.
 the dev team will make a pull request to the `xplr` repository containing something 
 that inspired them. Their inspiration can be anything from a cool CSS property, an 
 interesting design, quirky libraries, or exciting frameworks. During our dev meeting, 
-we will talk about the stuff we found and at the end of the discussion, update a 
-`CHANGE_LOG` to keep a weekly timeline of the inspo we added.
+we will talk about the stuff we found.
 
 The pull request will be in the form of a markdown file that contains a description of 
 the inspo, why they think it's interesting, and how we could potentially use it in the 
