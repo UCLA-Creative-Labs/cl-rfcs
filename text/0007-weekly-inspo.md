@@ -82,14 +82,6 @@ to write some custom linters to test the efficacy of the our posts.
 We can accomplish search using `Next.js` built in API system. Here is an [example](https://medium.com/@matswainson/building-a-search-component-for-your-next-js-markdown-blog-9e75e0e7d210https://medium.com/@matswainson/building-a-search-component-for-your-next-js-markdown-blog-9e75e0e7d210)
 search system using `Next.js`.
 
-### Change Log
-
-It would be nice to keep track of a `CHANGE_LOG` to see the week by week updates that
-happen to the respository. The functionality for this is mostly internal, and can serve
-as a method to expose newer board members to industry practices! We would most likely 
-have a `GitHub` action that runs at the time of dev team meeting each week, that would
-automatically create a pull request to update the `CHANGE_LOG`.
-
 ## What are the requirements for this project?
 
 `xplr` will require developing in `Next.js`, writing GitHub Actions, building linters, 
