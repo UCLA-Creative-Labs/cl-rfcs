@@ -1,5 +1,5 @@
 * Tracking issue: #
-* [Rendered version](/my-branch/text/xxxx.md)
+* [Rendered version](/UCLA-Creative-Labs/cl-rfcs/tree/my-branch/text/xxxx.md)
 
 ---
 
