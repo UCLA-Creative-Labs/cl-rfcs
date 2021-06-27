@@ -118,6 +118,11 @@ initially created under a Spotify account dedicated to our app and subsequently 
 member of the lobby. This way, we don't have to synchronize multiple users' libraries, and updates
 would only apply to a single playlist. This makes our lives a lot easier.
 
+In order to perform playlist modification, we will first authenticate our server and obtain a 
+Spotify Refresh Token. From there, we can use the Refresh Token to generate a new Access Token
+to perform requests onto the Spotify API. We **should** batch all of our operations to reduce
+the amount refreshes required.
+
 [Spotify API]: https://developer.spotify.com/documentation/web-api/
 
 #### Playing music from the playlist
