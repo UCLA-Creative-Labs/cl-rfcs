@@ -58,32 +58,55 @@ accomplish this using a standard lobby system: one person acts as the host and c
 lobby and receives a unique code; users who then enter this code can enter that particular
 lobby.
 
-We could probably set something like this up with a simple document database. Whenever a host
-creates a lobby, a new document is created with a unique identifying code. Then, if another
-user enters that code, their ID is added to the document. The document might look something
-like this:
+A data model that would be appropriate for this could be to have two tables.
+
+One table would store user data; a single record would include things like recently played songs,
+top songs, preferred genres, etc). Additionally, we could store a list of IDs of lobbies of
+which a given user is a member. This way, whenever a user logs in, two things would happen:
+* Their record's data is updated.
+* The playlists for each lobby the user is a part of are scheduled to update accordingly.
+Roughly speaking, the user table may look like this:
 ```json
-"<unique id>": {
-  "host_id": "<host id>",
-  "users": {
-    "<user id>": {
-      ...interesting data...
-    }
-  }
+{
+  "<user id>": {
+    "name": "<name>",
+    "lobbies": [ "<lobby id>", ... ],
+    "top_songs": [ "<song id>", ... ],
+    ...
+  },
+  ...
 }
 ```
-Furthermore, the actual lobby ID should be short or memorable. Looking into [human-readable IDs]
+
+
+The other table would store lobbies. Each lobby would have a host user, member users, a
+unique ID for accessing the lobby, and a playlist ID (which references the playlist under
+the CL Spotify account, see **Generating a playlist** below).
+Roughly speaking, the lobby table may look like this:
+```json
+{
+  "<unique id>": {
+    "host_id": "<host id>",
+    "users": [ "<user id>", "<another id>", ... ],
+    "playlist_id": "<playlist id>"
+  },
+  ...
+}
+```
+
+The actual lobby ID should be short or memorable. Looking into [human-readable IDs]
 seems promising.
 
 [human-readable IDs]: https://www.npmjs.com/package/human-readable-ids
 
-In the interim, something like Firebase Firestore should be enough. It might be a good idea
-to switch to something else (like MongoDB perhaps) if we want to worry about scaling and
-whatnot.
+Finally, in order to actually perform updates to lobby playlists, we can use a Redis instance
+to batch updates and make those updates at regular intervals (perhaps once a day).
 
-We could achieve persistent groups by just keeping these unique identifiers persistent, i.e.
-not deleting them. This way, the host and any other users can re-enter groups they are a part
-of by just entering their unique code.
+There are multiple options for managing this database, all of which have their pros and cons.
+One such option that @BryanPan342 and I think could be interesting to try out is
+[Oracle Autonomous Data Warehouse (ADW)].
+
+[Oracle Autonomous Data Warehouse (ADW)]: https://www.oracle.com/autonomous-database/autonomous-data-warehouse/
 
 #### Generating a playlist
 
@@ -132,6 +155,10 @@ Spotify offers a [playback SDK] to play music from Spotify on the client side. C
 
 [playback SDK]: https://developer.spotify.com/documentation/web-playback-sdk/
 [web API]: https://developer.spotify.com/documentation/web-api/
+
+It is important to note that the playback SDK is only functional for premium users. As such, when a
+user logs in, if they are determined to not have a Spotify Premium account then we would need to
+inform them that playback from our app is not allowed.
 
 ### What are the requirements for this project?
 
