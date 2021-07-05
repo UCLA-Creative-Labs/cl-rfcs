@@ -1,5 +1,5 @@
 ---
-rfc pr: [#xxx](https://github.com/UCLA-Creative-Labs/cl-rfcs/pull/xxx)
+rfc pr: https://github.com/UCLA-Creative-Labs/cl-rfcs/pull/xxx
 tracking issue: https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/yyy
 ---
 
@@ -30,13 +30,13 @@ tracking issue: https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/yyy
 > development process and what are some resources that we should be mindful of
 > before we start development?
 
-### What are the requirements for this project?
+## What are the requirements for this project?
 
 > How many people would we need for this project? Do we need to utilize OCI?
 > Listing the technical requirements ahead of time will make it easier to find
 > team members with experience **and** be transparent to people who want to learn.
 
-### What are we launching today?
+## What are we launching today?
 
 > Ideas are cheap, execution is not. What exactly can we see in the near future?
 > What are the barebones requirements to officially release this project?

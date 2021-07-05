@@ -1,13 +1,13 @@
 # Mergify Rules
-# 1. Automatic merge + squash
-# 2. Automatic merge
+# 1. Automatic merge for RFC
+# 2. Automatic merge for tooling
 # 3. Remove stale reviews
 # 4. Dependabot
 
 pull_request_rules:
 
-  # 1. Automatically merge master into branch, build, and squash
-  - name: automatic merge and squash
+  # 1. Automatically merge master for RFC
+  - name: automatic merge and squash for RFC
     actions:
       comment:
         message: Thanks for contributing! Your pull request will be updated from master and then merged automatically (do not update manually, and be sure to [allow changes to be pushed to your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork)).
@@ -19,31 +19,31 @@ pull_request_rules:
       delete_head_branch: {}
     conditions:
       - -title~=(WIP|wip)
-      - -label~=(work-in-progress|do-not-merge|no-squash)
+      - -label~=(work-in-progress|do-not-merge|tooling)
       - -merged
       - -closed
       - author!=dependabot[bot]
       - author!=dependabot-preview[bot]
-      - "#approved-reviews-by>=1"
+      - "#approved-reviews-by>=2"
       - -approved-reviews-by~=author
       - "#changes-requested-reviews-by=0"
   
-  # 2. Automatically merge master into branch and build
-  - name: automatic merge
+  # 2. Automatically merge master for tooling
+  - name: automatic merge and squash for tooling
     actions:
       comment:
         message: Thank you for contributing! Your pull request will be updated from master and then merged automatically (do not update manually, and be sure to [allow changes to be pushed to your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork)).
       merge:
         strict: smart
         # Merge instead of squash
-        method: merge
+        method: squash
         strict_method: merge
         commit_message: title+body
       delete_head_branch: {}
     conditions:
       - -title~=(WIP|wip)
       - -label~=(work-in-progress|do-not-merge)
-      - label~=no-squash
+      - label~=(tooling)
       - -merged
       - -closed
       - author!=dependabot[bot]
