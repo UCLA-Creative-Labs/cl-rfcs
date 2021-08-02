@@ -22,7 +22,8 @@ behavior to uclacreatives@gmail.com.
 \#|Title|Owner|Status
 ---|-----|-----|------
 [7](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/7)|[Weekly Inspo](https://github.com/UCLA-Creative-Labs/cl-rfcs/blob/master/text/0007-weekly-inspo.md)|[@BryanPan342](https://github.com/BryanPan342)|👷 implementing
-[2](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2)|[Spotify Blend: Lots](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2)|[@BryanPan342](https://github.com/BryanPan342)|✍️ review
+[2](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2)|[Spotify Blend: Lots](https://github.com/UCLA-Creative-Labs/cl-rfcs/blob/master/text/0002-group-spotify-playlists.md)|[@BryanPan342](https://github.com/BryanPan342)|✍️ review
+[14](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/14)|[Student org-focused GitHub user manager](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/14)||💡 proposed
 <!--END_TABLE-->
 
 ## What is an RFC?
