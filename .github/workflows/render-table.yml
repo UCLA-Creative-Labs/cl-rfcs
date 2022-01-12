@@ -24,7 +24,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Update RFC table in README
+          commit-message: "chore: update RFC table in README"
           labels: pr/tooling
           title: Update RFC table in README
           branch: auto/update-rfc-table
