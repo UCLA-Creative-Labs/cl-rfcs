@@ -95,14 +95,15 @@ need to map each post and advertisement run to a specific event hosted by
 Creative Labs and quantify the effect or potential correlation. This
 mapping would be done by giving each event in Creative Labs a certain
 time frame and checking the timestamp of each post or advertisement run
-to see which fall into that time frame.
+to see which fall into that time frame. Similar to Project 1, we would
+store the processed data into Firebase and use React-Vis to display and
+analyze the data.
 
 ### Project 3: Website Data Vis
 The third project would dive into where (and at what frequency) users
-are navigating towards on our main website.
-
-Project 3 with monitoring for the main website would require integration with
-the implementation of the site in the future.
+are navigating towards on our main website. We would then put the data
+into Firebase and display the data using the web app structure implemented
+in Project 1 and 2.
 
 ## What are we launching today?
 
@@ -158,7 +159,7 @@ Application cycle:
 ```json
 {
     "<cycle_id>": {
-        "application_status": "<accepted_rejected>",
+        "application_status": "<boolean>",
         "timestamp": "<timestamp>",
         "project_order": ["<project_id1>", "<project_id2>", ...],
         ...
@@ -218,5 +219,32 @@ CL event:
         "event_time": "<date>",
         "range_of_time": ["<date1>", "<date2>"],
         "attendees_list": ["<email1>", "<email2>", ...],
+    }
+}
+
+For Project 3, we could use the following data tables for each page on
+our main website and visitor.
+
+Page:
+```json
+{
+    "<page_url>": {
+        "number_of_visitors": "<number>",
+        "active_visitors": ["<visitor_id1", "<visitor_id2", ...],
+        "previous_destination": "<page_url>",
+        ...
+    }
+}
+```
+
+Visitor:
+```json
+{
+    "<visitor_id>": {
+        "current_page": "<page_url>",
+        "time_spent": "<number>",
+        "previous_sites": ["<page_url1>", "<page_url2>", ...],
+        "final_destination": "<boolean>",
+        ...
     }
 }
