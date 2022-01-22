@@ -19,19 +19,26 @@ Watchdog is meant to be a monorepo to house several data analysis tools
 for Creative Labs. These tools are primarily meant for Creative Labs
 board members, but we could look towards displaying some of the data
 publicly or publishing our findings through a blog post for marketing
-content! The projects are detailed in the later sections.
+content! We will detail the first project in the following sections.
 
 Note: Since we do not have complete datasets on many events or projects in
 the past, much of this will be just to setup infrastructure for the future.
 
-#### Future Goals
+### Future Goals
+
 The obvious first direction for future goals is for new data analysis
 projects to be added and implemented into this monorepo. It would be
 beneficial for there to be a system in place where anyone on Creative
 Labs board can submit an issue in regards to CL data - whether it's
 displaying a certain dataset or exploring if there is a correlation
 between two datasets - that the dev team can then add to existing
-projects or start a new project if necessary.
+projects or start a new project if necessary. 
+
+Other projects under ideation include a social media data visualizer
+that would monitor the correlation between social media post interactions
+(ads, likes, shares) and event attendance. Another project would be
+to create a tool that monitors where (and at what frequency) users
+are navigating towards on our main site.
 
 ## Why are we doing this?
 
@@ -45,65 +52,105 @@ have been proven to work.
 
 ## What is the high level design/implementation?
 
-On a high level, the current ideas for Watchdog tools follow the same
-structure, but with different data from various sources. The projects
-would be a web application that allows board members to authenticate
-themselves as the data is sensitive and for internal use only as of now.
-Following the authentication the data needs to be collected, preprocessed,
-and formatted. There then needs to be the development of the web app
-that displays the most important parts of the dataset. After this,
-options should be implemented for the user to selectively view various
-portions of the data (with respect to certain time periods or project
-types, etc). 
+On a high level, the projects for Watchdog tools follow the same structure,
+but with different data from various sources. The data needs to be collected,
+processed, and organized into specific data structures that we can query in
+the future. The projects would be displayed through a web application that
+allows board members to authenticate themselves as the data is sensitive and
+for internal use only as of now.
+
+The web application will display and visualize the important parts of the
+dataset with conclusions. After this, options will be implemented for the
+user to selectively view various portions of the data (with respect to certain
+time periods or project types, etc). 
 
 ## What are the requirements for this project?
 
-Watchdog is a collection of internal data visualization projects. They 
-all require authentication as the data is privacy sensitive, so Firebase
-experience for authentication and data storage would be useful. The
-projects would utilize Python for data fetching and processing portions
-and use React on the frontend to display the visualization and handle
+The first project is a continuation of the current Watchdog project, which
+will be a tool to get data analytics on Creative Labs applications and
+visualize that data on a web app that is accessible to all board members
+and teams.
+
+The project will utilize Python for data fetching and processing portions
+and use React on the frontend to display the datasets and handle
 user interactions. 
 
-### Project 1: Project Data Vis
-The first project is a continuation of the current Watchdog project, which
-is a tool to get data analytics on Creative Labs projects. Currently, it
-fetches project application information and displays its various statistics.
-We want to organize this by creating user datasets that would keep track
-of the same applicant through multiple application cycles. There would be a
-web app that displays the most important datasets in a visualized format and
-key conclusions would be highlighted. An addition would be to allow board
-members to better access the data by allowing users to choose their own
-method of displaying data (bar graph, pie chart, etc) and choosing a
-specific time period with various filters.
+#### Data Overview
+We have some main datasets to work with:
 
-Project 1 with project applications would use the [gspread API](https://docs.gspread.org/en/latest/user-guide.html)
-to obtain the data from the spreadsheets and parse through/organize the
-necessary statistics. Then, the post-processed organized data would be stored
-into Firebase, where we would use [React-Vis](https://uber.github.io/react-vis/) to display the data
-and come up with concrete conclusions and inferences.
+* all project member applications from Fall 2016 - Present
+* all project lead applications from Spring 2017 - Present
 
-### Project 2: Social Media Data Vis
-The second project would be a program that monitors how others interact
-with Creative Labs. This would be primarily to understand the correlation
-between social media post interactions (ads, likes, shares) and event
-attendance. 
+We have some preliminary questions to answer:
 
-Project 2 with social media monitoring would use the [Facebook API](https://developers.facebook.com/docs/graph-api/reference/page/)
-and the [Instagram API](https://developers.facebook.com/docs/instagram-api/) to obtain the neccesary datapoints. We would
-need to map each post and advertisement run to a specific event hosted by
-Creative Labs and quantify the effect or potential correlation. This
-mapping would be done by giving each event in Creative Labs a certain
-time frame and checking the timestamp of each post or advertisement run
-to see which fall into that time frame. Similar to Project 1, we would
-store the processed data into Firebase and use React-Vis to display and
-analyze the data.
+* Percentage of applicants who reapply
+    * Percentage of current project members who reapply for other projects
+* Age demographic
+* Major demographic
+* Experience demographic
+* Where do people hear about CL?
+* Does GM attendance reflect number of applications?
+* When do people usually apply?
+* Number of applicants per quarter
+* Does more projects == more applicants?
+* Popular types of projects?
 
-### Project 3: Website Data Vis
-The third project would dive into where (and at what frequency) users
-are navigating towards on our main website. We would then put the data
-into Firebase and display the data using the web app structure implemented
-in Project 1 and 2.
+#### Data Collection
+
+The project will need to first fetch the project member and project lead
+application information mentioned in the above section. We would need to use the
+[gspread API](https://docs.gspread.org/en/latest/user-guide.html) which allows
+a variety of functions to pull data in specific formats from google spreadsheets.
+gspread API is extremely simple to authenticate and requires minimal setup.
+
+#### Data Processing
+
+We want to organize the data from the spreadsheets by creating data structures
+that will allow us to query the necessary information easily. 
+
+The current data that we have is split into two groups: project member applications
+and project lead applications. The project member apps are in the format of:
+name, year, major, email, and project choices. The project lead apps are currently
+in the format of: project type, project name, accepted/rejected, timestamp, previous
+projects, number of openings, and project lead information (name, year, major, email).
+
+The main tables we need to set up are for each student, application, project,
+and time period. More details on these structures can be found in the ```Appendix```
+section.
+
+After organizing the data to our specified format, we would need to store this
+data using [Firestore](https://firebase.google.com/docs/firestore/quickstart).
+We would need to create an instance of Cloud Firestore (either by using Google
+Cloud Platform with credits or on our own server with a service account). Firestore
+stores data within Documents, which are in turn stored within Collections. We
+would create a Collection and add our various Documents where we can store
+different sets of necessary information. Finally, we would need to secure our
+data by specifying which parties are allowed access to the Firestore. 
+
+#### Data Visualization
+
+There will be a web app to showcase the info and we would need to use React
+to pull the data from the Documents in Firestore.
+
+The landing page will provide a general summary of our developed tool and a
+display of the most important datasets in a visualized format with highlighted
+key conclusions. Following that, the user will be able to go into various options.
+There are some current ideas: users choosing their own method of displaying data
+(bar graph, pie chart, etc), choosing to look into a specific time period in detail,
+having various filtering options for the data.
+
+Some technologies to look into for data visualization are [React-Vis](https://uber.github.io/react-vis/),
+[RAWGraphs](https://rawgraphs.io/about) and [Gephi](https://gephi.org/).
+
+#### Authentication
+
+This web app detailed in the above section would require authentication as the
+data is privacy sensitive, which can be done either through Firebase or Google App
+Scripts detailed [here](https://script.gs/password-protected-web-app/). 
+
+With Firebase, we will create a Document within our Collections that will contain a
+field with our password stored as a string. Then, we will check to see if the user's
+input matches our string and allow access if true.
 
 ## What are we launching today?
 
@@ -113,9 +160,9 @@ be successfully creating a web app that allows users to authenticate themselves
 and see a general overview of the project data. The first main add on to this
 version would be an interface that allows the user to select a certain time
 frame to view, or other various options such as looking solely at iOS or game
-development projects and their statistics. The second main addition to the
-barebones version would be a monitoring platform for both Creative Labs social
-media interactions and main website traffic.
+development projects and their statistics. Future additions to the barebones
+version would be a monitoring platform for both Creative Labs social media
+interactions and main website traffic.
 
 ## FAQ
 
@@ -127,17 +174,31 @@ media interactions and main website traffic.
 
 The original Watchdog project can be found [here](https://github.com/UCLA-Creative-Labs/watchdog/).
 
-For Project 1, we could use the following data tables for each project member,
-project, application cycle, and time period.
+For Project 1, we could use the following data tables for each student,
+application, project, and time period.
 
-Project member:
+Student:
 ```json
 {
     "<email>": {
         "name": "<name>",
         "year": "<year>",
         "major": "<major>",
-        "application_cycles": ["<cycle_id1>", "<cycle_id2>", ...],
+        "application": ["<application_id1>", "<application_id2>", ...],
+        ...
+    }
+}
+```
+
+Application:
+```json
+{
+    "<application_id>": {
+        "applicant": "<email>",
+        "application_status": "<boolean>",
+        "time_period": "<quarter_id>",
+        "timestamp": "<timestamp>",
+        "project_order": ["<email1>", "<email2>", ...],
         ...
     }
 }
@@ -149,19 +210,8 @@ Project:
     "<project_id>": {
         "type": "<project_type>",
         "number_of_accepted": "<number>",
+        "time_period": "<quarter_id>",
         "project_lead": ["<project_lead1>", "<project_lead2>", ...],
-        ...
-    }
-}
-```
-
-Application cycle:
-```json
-{
-    "<cycle_id>": {
-        "application_status": "<boolean>",
-        "timestamp": "<timestamp>",
-        "project_order": ["<project_id1>", "<project_id2>", ...],
         ...
     }
 }
@@ -172,7 +222,10 @@ Time period:
 {
     "<quarter_id>": {
         "number_of_projects": "<number>",
-        "number_of_members": "<number>",
+        "number_of_applicants": "<number>",
+        "number_of_accepted": "<number>",
+        "applications": ["<application_id1", "<application_id2>", "<application_id3>", ...],
+        "accepted_applications": ["<application_id1", "<application_id2>", "<application_id3>", ...],
         "projects": ["<project_id1>", "<project_id2>", ...],
         "project_distribution": {
             "iOS": "<number>",
@@ -194,57 +247,7 @@ Time period:
             "DESMA": "<number>",
             ...
         },
-    }
-}
-```
-
-For Project 2, we could use the following data tables for each post and
-Creative Labs event.
-
-Post:
-```json
-{
-    "<post_id>": {
-        "created_time": "<created_time>",
-        "linked_event": "<event_id>",
-    }
-}
-```
-
-CL event:
-```json
-{
-    "<event_id>": {
-        "linked_posts": ["<post_id1>", "<post_id2>", "<post_id3>", ...],
-        "event_time": "<date>",
-        "range_of_time": ["<date1>", "<date2>"],
-        "attendees_list": ["<email1>", "<email2>", ...],
-    }
-}
-
-For Project 3, we could use the following data tables for each page on
-our main website and visitor.
-
-Page:
-```json
-{
-    "<page_url>": {
-        "number_of_visitors": "<number>",
-        "active_visitors": ["<visitor_id1", "<visitor_id2", ...],
-        "previous_destination": "<page_url>",
         ...
     }
 }
 ```
-
-Visitor:
-```json
-{
-    "<visitor_id>": {
-        "current_page": "<page_url>",
-        "time_spent": "<number>",
-        "previous_sites": ["<page_url1>", "<page_url2>", ...],
-        "final_destination": "<boolean>",
-        ...
-    }
-}
