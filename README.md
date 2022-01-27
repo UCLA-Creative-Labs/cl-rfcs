@@ -23,10 +23,10 @@ behavior to uclacreatives@gmail.com.
 ---|-----|-----|------
 [2](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/2)|[Spotify Blend: Lots](https://github.com/UCLA-Creative-Labs/cl-rfcs/blob/master/text/0002-group-spotify-playlists.md)|[@BryanPan342](https://github.com/BryanPan342)|👷 implementing
 [7](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/7)|[Weekly Inspo](https://github.com/UCLA-Creative-Labs/cl-rfcs/blob/master/text/0007-weekly-inspo.md)|[@BryanPan342](https://github.com/BryanPan342)|👷 implementing
+[20](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/20)|[Internal data visualization](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/20)|[@tylercxu](https://github.com/tylercxu)|👷 implementing
 [14](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/14)|[Student org-focused GitHub user manager](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/14)||💡 proposed
 [18](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/18)|[Event-targeted social media manager](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/18)||💡 proposed
-[20](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/20)|[Internal data visualization](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/20)|[@tylercxu](https://github.com/tylercxu)|💡 proposed
-[21](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/21)|[Interaction data monitoring ](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/21)|[@tylercxu](https://github.com/tylercxu)|💡 proposed
+[21](https://github.com/UCLA-Creative-Labs/cl-rfcs/issues/21)|[Interaction data monitoring ](https://github.com/UCLA-Creative-Labs/cl-rfcs/blob/master/text/0021-internal-data-monitoring.md)|[@tylercxu](https://github.com/tylercxu)|💡 proposed
 <!--END_TABLE-->
 
 ## What is an RFC?
